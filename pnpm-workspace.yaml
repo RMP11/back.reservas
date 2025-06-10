@@ -1,3 +1,5 @@
 onlyBuiltDependencies:
   - '@nestjs/core'
+  - '@prisma/client'
+  - '@scarf/scarf'
   - '@swc/core'
