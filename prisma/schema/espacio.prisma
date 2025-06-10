@@ -7,13 +7,13 @@ enum TipoEspacio {
 }
 
 model Espacio {
-  id               String    @id @default(uuid())
-  nombre           String
-  descripcion      String?
-  capacidad        Int?
-  tipoEspacio      TipoEspacio // Por ejemplo: SALON, AUDITORIO, CANCHA
-  ubicacion        String?
-  reservas         Reserva[]
-  fechaCreacion    DateTime  @default(now())
-  fechaActualizacion DateTime  @updatedAt
+  id                 String      @id @default(uuid())
+  nombre             String
+  descripcion        String?
+  capacidad          Int?
+  tipoEspacio        TipoEspacio // Por ejemplo: SALON, AUDITORIO, CANCHA
+  ubicacion          String?
+  reservas           Reserva[]
+  fechaCreacion      DateTime?   @default(now())
+  fechaActualizacion DateTime?   @updatedAt
 }
