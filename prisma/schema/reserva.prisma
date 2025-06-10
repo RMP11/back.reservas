@@ -1,0 +1,33 @@
+enum EstadoReserva {
+  PENDIENTE
+  CONFIRMADA
+  CANCELADA
+  COMPLETADA
+}
+
+enum EstadoPago {
+  PENDIENTE
+  COMPLETADO
+  FALLIDO
+  REEMBOLSADO
+}
+
+model Reserva {
+  id               String    @id @default(uuid())
+  idUsuario        String
+  usuario          Usuario   @relation(fields: [idUsuario], references: [id])
+  idEspacio        String
+  espacio          Espacio   @relation(fields: [idEspacio], references: [id])
+  horaInicio       DateTime
+  horaFin          DateTime
+  estado           EstadoReserva @default(PENDIENTE) // PENDIENTE, CONFIRMADA, CANCELADA, COMPLETADA
+  notas            String?
+  // Campos para futuras funcionalidades de pago
+  idPago           String?   @unique
+  estadoPago       EstadoPago? // PENDIENTE, COMPLETADO, FALLIDO, REEMBOLSADO
+
+  fechaCreacion    DateTime  @default(now())
+  fechaActualizacion DateTime  @updatedAt
+
+  @@unique([idEspacio, horaInicio, horaFin]) // Asegura que no haya reservas duplicadas para el mismo espacio y tiempo
+}

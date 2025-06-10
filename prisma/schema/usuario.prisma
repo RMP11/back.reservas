@@ -1,0 +1,15 @@
+enum Rol {
+  USUARIO
+  ADMIN
+}
+
+model Usuario {
+  id               String    @id @default(uuid())
+  email            String    @unique
+  contrasena       String // Considera usar un hash para almacenar contraseñas de forma segura
+  nombre           String?
+  rol              Rol       @default(USUARIO) // Asigna un rol por defecto
+  reservas         Reserva[]
+  fechaCreacion    DateTime  @default(now())
+  fechaActualizacion DateTime  @updatedAt
+}
