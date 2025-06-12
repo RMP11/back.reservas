@@ -3,12 +3,13 @@ import {
   BadRequestException,
   NotFoundException,
 } from '@nestjs/common';
-import { Reserva, EstadoReserva, Prisma } from '@prisma/client';
+import { EstadoReserva, Prisma } from '@prisma/client';
 
 import * as dayjs from 'dayjs';
 import * as isBetween from 'dayjs/plugin/isBetween';
 import * as isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../../prisma/prisma.service';
+
 import { ReservaRepository } from 'src/reservas/application/posts/out/reserva.repository';
 import { ReservaEntity } from 'src/reservas/domain/entity/reserva.entity';
 import { CrearReservaDto } from 'src/reservas/dtos/crear-reserva.dto';

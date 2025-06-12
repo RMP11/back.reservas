@@ -15,7 +15,6 @@ export class ReservasController {
 
   @Post()
   async crearReserva(@Body() crearReservaDto: CrearReservaDto) {
-    // return await this.reservasService.crearReserva(crearReservaDto);
     return await this.crearReservaUC.execute(
       crearReservaDto,
       'f7d8bba9-7a66-4c2d-bc85-3470558f61fe',
