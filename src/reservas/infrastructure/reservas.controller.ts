@@ -1,16 +1,25 @@
 import { Controller, Post, Body, Query, Get } from '@nestjs/common';
-import { ReservasService } from './reservas.service';
-import { CrearReservaDto } from './dtos/crear-reserva.dto';
 import { Reserva } from '@prisma/client';
 import { ApiQuery } from '@nestjs/swagger';
+import { CrearReservaUseCase } from '../application/use-cases/crear-reserva.use-case';
+import { ObtenerReservasUseCase } from '../application/use-cases/obtener-reservas.use-case';
+import { CrearReservaDto } from '../dtos/crear-reserva.dto';
+import { ReservaEntity } from '../domain/entity/reserva.entity';
 
 @Controller('reservas')
 export class ReservasController {
-  constructor(private readonly reservasService: ReservasService) {}
+  constructor(
+    private readonly crearReservaUC: CrearReservaUseCase,
+    private readonly obtenerReservasUC: ObtenerReservasUseCase,
+  ) {}
 
   @Post()
   async crearReserva(@Body() crearReservaDto: CrearReservaDto) {
-    return await this.reservasService.crearReserva(crearReservaDto);
+    // return await this.reservasService.crearReserva(crearReservaDto);
+    return await this.crearReservaUC.execute(
+      crearReservaDto,
+      'f7d8bba9-7a66-4c2d-bc85-3470558f61fe',
+    );
   }
 
   @Get()
@@ -47,8 +56,8 @@ export class ReservasController {
     @Query('estado') estado?: string,
     @Query('fechaInicio') fechaInicio?: string,
     @Query('fechaFin') fechaFin?: string,
-  ): Promise<Reserva[]> {
-    return this.reservasService.obtenerReservas(
+  ): Promise<ReservaEntity[]> {
+    return await this.obtenerReservasUC.execute(
       'f7d8bba9-7a66-4c2d-bc85-3470558f61fe',
       true,
       {

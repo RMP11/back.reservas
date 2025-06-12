@@ -1,0 +1,11 @@
+import { ReservaEntity } from 'src/reservas/domain/entity/reserva.entity';
+import { CrearReservaDto } from 'src/reservas/dtos/crear-reserva.dto';
+
+export interface ReservaServicePort {
+  crearReserva(dto: CrearReservaDto): Promise<ReservaEntity>;
+  obtenerReservas(
+    idUsuario: string,
+    esAdmin: boolean,
+    filtros: any,
+  ): Promise<ReservaEntity[]>;
+}
